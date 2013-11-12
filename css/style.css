@@ -1,20 +1,69 @@
+
+@font-face {
+  font-family: 'Brandon Black';
+  src:url('fonts/Brandon_blk.otf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Brandon Black Italic';
+  src:url('fonts/Brandon_blk_it.otf');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Brandon Medium';
+  src:url('fonts/Brandon_med.otf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Brandon Thin';
+  src:url('fonts/Brandon_thin.otf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+body{
+  font-family: "Vollkorn";
+  margin: 0 auto;
+  background: #eaecec;
+  border: 0.5em solid #fff;
+}
+
+h1{
+  font-family: "Brandon Medium";
+  font-size: 2em;
+}
+
+p{
+  font-family: "Vollkorn";
+}
+
 a, a:visited, a:active {
   color: #444;
 }
 
+.container{
+  width: 960px;
+  margin: 2em auto;
+}
+
 #vis {
-  width: 940px;
-  height: 600px;
+  width: 960px;
+  height: auto;
   clear: both;
-  margin-bottom: 10px;
 }
 
 footer {
   text-align: center;
 }
 
-#view_selection {
-  margin-top: 10px;
+.container #view_selection {
+  margin: 0 auto;
 }
 
 .years {
@@ -28,7 +77,7 @@ footer {
 	left: 100px;
   -moz-border-radius:5px;
 	border-radius: 5px;
-  border: 2px solid #000;
+  border: 1px solid #333;
 	/* background: #222222; */
   background: #fff;
 	opacity: .9;
@@ -48,3 +97,6 @@ footer {
   font-weight:bold;
 }
 
+#info-box{
+  display:none;
+}
