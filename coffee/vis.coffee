@@ -17,6 +17,7 @@ class BubbleChart
       "2009": {x: @width / 2, y: @height / 2},
       "2010": {x: 2 * @width / 3, y: @height / 2}
     }
+
     @bank_centers = {
       "boc": {x: @width / 2 - 230, y: @height/2},
       "citi": {x: @width / 2 - 80, y: @height / 2},
@@ -25,23 +26,20 @@ class BubbleChart
     }
 
     @complaint_centers = {
-      "billing":{x: @width/2 - 280, y: @height/5+100},
-      "protection": {x: @width / 2 - 80, y: @height/5+100 },
+      "billing":{x: @width/2 - 250, y: @height/5+100},
+      "apr": {x: @width / 2 - 80, y: @height/5+100 },
+      "closing": {x: @width / 2 + 80, y: @height/5+100 },
+      "reporting": {x: @width/2 + 280, y: @height/5+100},
 
+      "fraud": {x: @width / 2 - 270, y: @height/3+120},
+      "protection": {x: @width / 2 - 80, y: @height/3+120},
+      "customer": {x: @width/2 + 80, y: @height/3+120},
+      "other":  {x: @width/2 + 280, y: @height / 3+120},
 
-      "unsolicited":  {x: @width/2 + 280, y: @height / 3+100},
-      
-      "forbearance": {x: @width / 2 + 80, y: @height / 2+200},
-      "latefee": {x: @width / 2 + 80, y: @height/5+100 },
-      "collection": {x: @width/2 + 280, y: @height/5+100},
-
-      "customer": {x: @width / 2 - 280, y: @height/2+200},
-      "other": {x: @width / 2 - 80, y: @height / 2+200},
-      "fraud": {x: @width/2 + 280, y: @height / 2+200},
-
-      "reporting": {x: @width / 2 - 280, y: @height/3+100},
-      "closing": {x: @width / 2 - 80, y: @height / 3+100},
-      "apr": {x: @width / 2 + 80, y: @height / 3+100},
+      "collection": {x: @width / 2 - 280, y: @height/3+220},
+      "latefee": {x: @width / 2 - 80, y: @height / 3+220},
+      "forbearance": {x: @width / 2 + 100, y: @height / 3+220},
+      "unsolicited": {x: @width / 2 + 280, y: @height / 3+250},
 
     }
 
@@ -113,10 +111,10 @@ class BubbleChart
     @circles.enter().append("circle")
       .attr("r", 0)
       .attr("fill", (d) => @fill_color(d.group))
-      .attr("stroke-width", 2)
+      .attr("stroke-width", 1)
       .attr("stroke", (d) => d3.rgb(@fill_color(d.group)).darker())
       .attr("id", (d) -> "bubble_#{d.id}")
-      .attr('opacity','0.95')
+      .attr('opacity','0.85')
       .on("mouseover", (d,i) -> that.show_details(d,i,this))
       .on("mouseout", (d,i) -> that.hide_details(d,i,this))
 
@@ -194,7 +192,7 @@ class BubbleChart
 
   # Method to display year titles
   display_banks: () =>
-    banks_x = {"boc":  @width / 2 - 380,"citi": @width / 2 - 140,"wells": @width / 2 + 80, "chase": @width/2 + 380}
+    banks_x = {"boc":  @width/2 - 350 ,"citi": @width/2 - 100,"wells": @width/2 + 125, "chase": @width/2 + 325}
 
     banks_data = d3.keys(banks_x)
     banks = @vis.selectAll(".banks")
@@ -237,9 +235,39 @@ class BubbleChart
 
   # Method to display complaint titles
   display_complaints: () =>
-    complaints_x = {"Unsolicited issuance of credit card":  @width / 2 - 380,"Forbearance / Workout plans": @width / 2 - 80,"Late fee": @width / 2 + 80,"Collection Practices": @width/2 + 380,"Customer service / Customer relations": @width / 2 - 380,"Other": @width / 2 - 80,"Credit card protection / Debt protection": @width / 2 + 80,"Identity theft / Fraud / Embezzlement": @width/2 + 380,"Credit reporting": @width / 2 - 380,"Closing/Cancelling account": @width / 2 - 80,"APR or interest rate": @width / 2 + 80,"Billing Disputes": @width/2 + 380
+
+    complaints_x = {
+    "Billing Disputes":  @width / 2 - 350,
+    "APR or interest rate": @width / 2 - 80,
+    "Closing account": @width / 2 + 160,
+    "Credit reporting": @width/2 + 380,
+
+    "Fraud": @width / 2 - 380,
+    "Credit / Debit protection": @width / 2 - 80,
+    "Customer service": @width / 2 + 160,
+    "Other": @width/2 + 380,
+
+    "Collection Practices": @width / 2 - 380,
+    "Late fee": @width / 2 - 80,
+    "Forbearance": @width / 2 + 160,
+    "Unsolicited issuance": @width/2 + 380
     }
-    complaints_y = { "Unsolicited issuance of credit card":  40,"Forbearance / Workout plans": 40, "Late fee": 40,"Collection Practices": 40,"Customer service / Customer relations": @height/2,"Other": @height/2,"Credit card protection / Debt protection": @height/2,"Identity theft / Fraud / Embezzlement": @height/2,"Credit reporting": @height-100,"Closing/Cancelling account": @height-100,"APR or interest rate": @height-100,"Billing Disputes": @height-100
+
+    complaints_y = { 
+    "Billing Disputes":  40,
+    "APR or interest rate": 40, 
+    "Closing account": 40,
+    "Credit reporting": 40,
+
+    "Fraud": @height/2 + 40,
+    "Credit / Debit protection": @height/2 + 40,
+    "Customer service": @height/2 + 40,
+    "Other": @height/2 + 40,
+
+    "Collection Practices": @height-100,
+    "Late fee": @height-100,
+    "Forbearance": @height-100,
+    "Unsolicited issuance": @height-100
     }
     complaints_data = d3.keys(complaints_x)
     complaints = @vis.selectAll(".complaints")
@@ -280,7 +308,7 @@ class BubbleChart
 
   # Method to display year titles
   display_years: () =>
-    years_x = {"2008": 160, "2009": @width / 2, "2010": @width - 160}
+    years_x = {"2008": 160, "2009": @width / 2, "2010": @width - 200}
     years_data = d3.keys(years_x)
     years = @vis.selectAll(".years")
       .data(years_data)
